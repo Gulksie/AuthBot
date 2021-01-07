@@ -1,9 +1,16 @@
+# set working directory to the directory the file is being run from
+# this NEEDS TO BE RUN before all other import statments for saving to work properly!
+import os, pathlib
+
+os.chdir(pathlib.Path(__file__).parent.absolute())
+
 import discord
 from discord.ext import tasks
 from datetime import datetime
 from time import sleep as timesleep
 
 import verify
+import keepAlive
 
 botIntents = discord.Intents(messages=True, members=True, guilds=True)
 client = discord.Client(intents=botIntents)
@@ -126,7 +133,15 @@ async def on_message(message):
         await author.send(newUserMessage2)
 
 if __name__ == "__main__":
-    timesleep(30)  # need to wait on terminal startup for some reason
+    # below code is no longer required on non-knockoff raspbery pi server
+    # timesleep(30)  # need to wait on terminal startup; networking startup takes some amount of time after the scripts are run at startup
+
+    keepAlive.run()
     updateEmails.start()
     verify.startUp()
-    client.run("Njk1MDY0NDczMDM5NTM2MTk5.XoUvPA.owvMxo3wWfK8lcNlC2SA0MJaNzk")
+
+    # grab discord key
+    with open("discordKey", "r") as f:
+        authToken = f.readline().strip()
+        
+    client.run(authToken)

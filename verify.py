@@ -14,7 +14,7 @@ pendingKeys = []
 # the time each code is valid for, in seconds
 validTime = 5 * 60
 
-fileName = "/home/gulk/authbot/users.yaml"
+fileName = "users.yaml"
 
 def startUp():
     verifEmail.login()

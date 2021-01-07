@@ -4,6 +4,8 @@ import email
 import atexit
 from datetime import datetime
 
+# much of this would probably function better being written object-oriented but oh well
+
 # with open("loginDetails", "r") as f:
 #     loginDetails = f.readlines()
 
@@ -26,7 +28,7 @@ def login():
     reciveServer = imaplib.IMAP4_SSL("imap.gmail.com")
 
     print("Logging into email")
-    with open("/home/gulk/authbot/loginDetails", "r") as f:
+    with open("loginDetails", "r") as f:
         loginDetails = f.readlines()
 
     usr, psswd = loginDetails[0].split(',')
