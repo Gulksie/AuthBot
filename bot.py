@@ -114,9 +114,10 @@ async def beforeUpdateEmails():
 # quick and dirty way to check for our verification message
 @client.event
 async def on_message(message):
+    author = message.author
+    userID = author.id
+
     if (message.content.startswith(verifCommand)):
-        author = message.author
-        userID = author.id
         print(f"Recived verification request from {author.display_name} at {datetime.now()}")
 
         #check if user is already verified or in verification process, if so, quit
@@ -132,6 +133,10 @@ async def on_message(message):
         await author.send(f"`{code}`")
         await author.send(newUserMessage2)
 
+    elif userID == 232230909363879939 and message.content == "ping":  # my personal discord id, simple command to check if bot is online
+        message.channel.send(f"Pong @ {datetime.now()}")
+
+
 if __name__ == "__main__":
     # below code is no longer required on non-knockoff raspbery pi server
     # timesleep(30)  # need to wait on terminal startup; networking startup takes some amount of time after the scripts are run at startup
@@ -143,5 +148,5 @@ if __name__ == "__main__":
     # grab discord key
     with open("discordKey", "r") as f:
         authToken = f.readline().strip()
-        
+
     client.run(authToken)
