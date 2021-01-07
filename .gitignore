@@ -144,3 +144,4 @@ cython_debug/
 *.yaml
 loginDetails
 discordKey
+.replit

@@ -134,7 +134,7 @@ async def on_message(message):
         await author.send(newUserMessage2)
 
     elif userID == 232230909363879939 and message.content == "ping":  # my personal discord id, simple command to check if bot is online
-        message.channel.send(f"Pong @ {datetime.now()}")
+        await message.channel.send(f"Pong @ {datetime.now()}")
 
 
 if __name__ == "__main__":
